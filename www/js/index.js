@@ -6,7 +6,7 @@ function onDeviceReady() {
 //创建一个新商品 
 function createNewItem()  
 {  
-    let shoppingList = {};  
+    var shoppingList = {};  
    
     // 弹出对话框输入一个新商品 
     let Item = prompt("New Item","");  
@@ -134,15 +134,16 @@ function deleteSelectedRow(deleteButton)
 //保存shopping list  
 function saveShoppingList()  
 {  
-    let listArray = {};  
-    let checkBoxState = 0;  
-    let textValue = "";  
+    var listArray = {};  
+    var checkBoxState = 0;  
+    var textValue = "";  
    
     let table = document.getElementById("dataTable");  
    
-    if (table.rows.length != 0)  
+    let rowCount = table.rows.length;
+    if (rowCount != 0)  
     {  
-        for(let i=0; i<table.rows.length; i++)  
+        for(let i=0; i<rowCount; i++)  
         {  
             let row = table.rows[i];  
             let chkbox = row.cells[0].childNodes[0];  
@@ -169,10 +170,14 @@ function saveShoppingList()
     {  
         listArray = null;  
     }  
-   
-    // use the local storage API to persist the data as JSON  
-    window.localStorage.setItem("shoppingList", JSON.stringify(listArray));  
+    
+    saveAsJASON(listArray);
 }  
+
+function saveAsJASON(listArray){
+    window.localStorage.setItem("shoppingList", JSON.stringify(listArray)); 
+    console.log("Save as JASON successfully.")
+}
 
 function loadShoppingList()  
 {  
