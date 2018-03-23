@@ -39,7 +39,8 @@ function addTableRow(shoppingList, appIsLoading)
     var cell1 = row.insertCell(0);  
     var element1 = document.createElement("input");  
     element1.type = "checkbox";  
-    element1.name = "chkbox[]";  
+    element1.name = "chkbox"; 
+    element1.className = "chkbox";
     element1.checked = shoppingList.check;  
     element1.setAttribute("onclick", "checkboxClicked()");  
     cell1.appendChild(element1);  
@@ -48,9 +49,10 @@ function addTableRow(shoppingList, appIsLoading)
     var cell2 = row.insertCell(1);  
     var element2 = document.createElement("input");  
     element2.type = "text";  
-    element2.name = "txtbox[]";  
+    element2.name = "txtbox";  
     element2.size = 16;  
     element2.id = "text" + rowID;  
+    element2.className = "form-control";
     element2.value = shoppingList.text;  
     //改成input？
     element2.setAttribute("onchange", "saveShoppingList()");  
@@ -61,14 +63,16 @@ function addTableRow(shoppingList, appIsLoading)
     var element3 = document.createElement("input");  
     element3.type = "button";  
     element3.id = rowID;  
-    element3.value = "View";  
+    element3.value = "View";
+    element3.className = "btn btn-info";
     element3.setAttribute("onclick", "viewSelectedRow(document.getElementById('text' + this.id))");  
     cell3.appendChild(element3);  
    
     //删除按钮
     var cell4 = row.insertCell(3);  
     var element4 = document.createElement("input");  
-    element4.type = "button";  
+    element4.type = "button";
+    element4.className = "btn btn-danger";
     element4.value = "Delete";  
     element4.setAttribute("onclick", "deleteSelectedRow(this)");  
     cell4.appendChild(element4);  
