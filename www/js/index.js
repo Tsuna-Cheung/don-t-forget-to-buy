@@ -171,22 +171,25 @@ function saveShoppingList()
         listArray = null;  
     }  
     
-    saveAsJASON(listArray);
+    saveAsJSON(listArray);
 }  
 
-function saveAsJASON(listArray){
+function saveAsJSON(listArray){
     window.localStorage.setItem("shoppingList", JSON.stringify(listArray)); 
-    console.log("Save as JASON successfully.")
+    console.log("Save as JSON successfully.")
 }
 
 function loadShoppingList()  
 {  
     // use the local storage API load the JSON formatted to-do list, and decode it  
-    var theList = JSON.parse(window.localStorage.getItem("shoppingList"));  
+    var theList = JSON.parse(window.localStorage.getItem("shoppingList")); 
+    console.log("Load JSON successfully");
+    
    
     if (theList.equals(null))  
     {  
-        deleteAllRows();  
+        deleteAllRows();
+        console.log("NULL JSON DATA");
     }  
     else  
     {  
