@@ -1,7 +1,11 @@
-document.addEventListener("deviceready", onDeviceReady, false);
-function onDeviceReady() {
-	loadShoppingList();
-}
+$(document).ready(function() { 
+   loadShoppingList();
+    console.log("device ready");
+    $('#createBtn').click(createNewItem);
+    $('#deletePBtn').click(removePurchasedItems);
+});
+
+
 
 //创建一个新商品 
 function createNewItem()  
@@ -156,14 +160,20 @@ function saveShoppingList()
                 checkBoxState= 0;  
             }  
    
-            let textbox = row.cells[1].childNodes[0];  
-            textValue = textbox.value;  
+            let textbox = row.cells[1].childNodes[0];
+            
+            if(textbox.value == ""){
+                    alert("Item can't be empty!");
+                }
+            else{
+                textValue = textbox.value;  
+                listArray["row" + i] =  
+                    {   check : checkBoxState,  
+                        text : textValue};  
+                
+            }
    
-            listArray["row" + i] =  
-            {  
-                check : checkBoxState,  
-                text : textValue  
-            };  
+            
         }  
     }  
     else  
@@ -186,13 +196,14 @@ function loadShoppingList()
     console.log("Load JSON successfully");
     
    
-    if (theList.equals(null))  
+    if (null == theList)  
     {  
         deleteAllRows();
         console.log("NULL JSON DATA");
     }  
     else  
     {  
+        console.log("JSON DATA");
         let count = 0;  
         for (let obj in theList)  
         {  
