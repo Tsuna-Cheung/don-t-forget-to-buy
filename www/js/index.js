@@ -5,15 +5,32 @@ $(document).ready(function() {
     $('#deletePBtn').click(removePurchasedItems);
 });
 
+function createPrompt(){
+    navigator.notification.prompt(
+    '',  // message
+    onPrompt,                  // callback to invoke
+    'Add a new item',            // title
+    ['Done','Cancel'],             // buttonLabels
+);
+}
 
-
+function onPrompt(results) {
+        if(results.buttonIndex == '1'){
+                createNewItem(results.input1);
+            }
+        else{
+            console.log("input cancel.");
+        }
+    }
+    
 //创建一个新商品 
-function createNewItem()  
+function createNewItem(userInputTxt)  
 {  
     var shoppingList = {};  
-   
-    // 弹出对话框输入一个新商品 
-    let Item = prompt("New Item","");  
+    
+    //let Item = prompt("New Item","");  
+    let Item = userInputTxt;
+    
     if (Item != null)  
     {  
         if (Item == "")  
