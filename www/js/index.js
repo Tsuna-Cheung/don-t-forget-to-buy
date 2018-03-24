@@ -1,7 +1,7 @@
 $(document).ready(function() { 
    loadShoppingList();
     console.log("device ready");
-    $('#createBtn').click(createNewItem);
+    $('#createBtn').click(createPrompt);
     $('#deletePBtn').click(removePurchasedItems);
 });
 
