@@ -18,7 +18,8 @@ function createNewItem()
     {  
         if (Item == "")  
         {  
-            alert("Item can't be empty!");  
+            //alert("Item can't be empty!");  
+            createAlert("Item cannot be empty!");
         }  
         else  
         {  
@@ -95,8 +96,7 @@ function checkboxClicked()
 {  
     var table = document.getElementById("dataTable");  
     var rowCount = table.rows.length;  
-   
-    // loop through all rows of the table  
+    
     for(let i = 0; i < rowCount; i++)  
     {  
         let row = table.rows[i];  
@@ -124,7 +124,7 @@ function checkboxClicked()
 //alert商品的名字
 function viewSelectedRow(itemName)  
 {  
-    alert(itemName.value); 
+    createAlert(itemName.value); 
 }  
 
 //删除选中行
@@ -163,7 +163,7 @@ function saveShoppingList()
             let textbox = row.cells[1].childNodes[0];
             
             if(textbox.value == ""){
-                    alert("Item can't be empty!");
+                    createAlert("Item can't be empty!");
                 }
             else{
                 textValue = textbox.value;  
@@ -190,12 +190,10 @@ function saveAsJSON(listArray){
 }
 
 function loadShoppingList()  
-{  
-    // use the local storage API load the JSON formatted to-do list, and decode it  
+{   
     var theList = JSON.parse(window.localStorage.getItem("shoppingList")); 
     console.log("Load JSON successfully");
     
-   
     if (null == theList)  
     {  
         deleteAllRows();
@@ -209,14 +207,11 @@ function loadShoppingList()
         {  
             count++;  
         }  
-   
-        // remove any existing rows from the table  
+ 
         deleteAllRows();  
-   
-        // loop through the to-dos  
+
         for(let i = 0; i < count; i++)  
-        {  
-            // adding a row to the table for each one  
+        {   
             addTableRow(theList["row" + i], true);  
         }  
     }  
@@ -256,5 +251,20 @@ function removePurchasedItems()
     }  
      
     saveShoppingList();  
-    alert("Purchased Items Were Cleared Successfully.");  
+   // alert("Purchased Items Were Cleared Successfully.");  
+    createAlert("Purchased Items Were Cleared Successfully.");
 }  
+
+function createAlert(alertTxt) {
+
+	navigator.notification.alert(
+    '',  // message
+    alertDismissed,         // callback
+    alertTxt,            // title
+    'Done'                  // buttonName
+);
+
+}
+function alertDismissed() {
+    console.log("dialog shown");
+}
